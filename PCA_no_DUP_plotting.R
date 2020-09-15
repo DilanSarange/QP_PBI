@@ -2,12 +2,15 @@ setwd("I:/Quinoa/Results/SNP_Calling_V2/Final_data_analysis/PCA")
 library(tidyverse)
 library(ggplot2)
 
+# read output from SNPRelate
+
 PCA<-read.csv("pca_all_no_dup_GWAS.csv")
 
 country<-read.csv("country.csv")
 
 head(PCA)
 
+# read populations
 highland<-read.table("highland.txt",sep="\t",header = F)
 
 head(highland)
@@ -26,15 +29,17 @@ colnames(pop_info)<-c("id","pop")
 
 left_join(PCA,pop_info,by="id") %>% left_join(.,country,by="id")->pca
 
- write.csv(pca,"PCA_no_duplicates_2.csv")
+write.csv(pca,"PCA_no_duplicates_2.csv")
 
 #pca<-read.csv("PCA_no_duplicates.csv")
  
- pca2<-read.csv("PCA_no_duplicates_2.csv")
+pca2<-read.csv("PCA_no_duplicates_2.csv")
+
+# plotting 
 
 head(pca)
 
-ggplot(pca,aes(PC1,PC2,color=country))+geom_point()+
+ggplot(pca,aes(PC1,PC2,color=Country))+geom_point()+
   scale_x_continuous(name="PC1 (23.35%)")+
   scale_y_continuous(name="PC2 (9.45%)")+
   theme_classic()+
@@ -44,7 +49,7 @@ ggplot(pca,aes(PC1,PC2,color=country))+geom_point()+
   theme( axis.line = element_line(colour = "black", size = 0.60, linetype = "solid"))+
   theme(panel.background = element_rect(colour = "black", size = 0.60))
 
-
+# adding colors manually
 ggplot(pca2,aes(PC1,PC2,color=Country))+geom_point(size = 2)+
   scale_x_continuous(name="PC1 (23.35%)")+
   scale_y_continuous(name="PC2 (9.45%)")+
