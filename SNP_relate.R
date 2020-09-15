@@ -40,7 +40,7 @@ pca_My_data_eigvect <- data.frame(PC1=pca_My_data$eigenvect[,1],  # the first ei
                             PC7=pca_My_data$eigenvect[,7],
                             PC8=pca_My_data$eigenvect[,8],
                             PC9=pca_My_data$eigenvect[,9],
-                            PC10=pca_My_data$eigenvect[,9],
+                            PC10=pca_My_data$eigenvect[,10],
                             stringsAsFactors = FALSE)
 
 
